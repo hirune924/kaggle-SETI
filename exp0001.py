@@ -236,7 +236,7 @@ def main():
     lr_monitor = LearningRateMonitor(logging_interval='step')
     checkpoint_callback = ModelCheckpoint(dirpath=os.path.join(conf.output_dir, 'ckpt/'), monitor='val_score', 
                                           save_last=True, save_top_k=5, mode='max', 
-                                          save_weights_only=True, filename='{epoch}-{val_score:.5f}')
+                                          save_weights_only=True, filename=f'fold{conf.fold}-'+'{epoch}-{val_score:.5f}')
 
     data_module = SETIDataModule(conf)
 
