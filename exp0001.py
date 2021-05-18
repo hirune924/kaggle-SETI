@@ -36,7 +36,8 @@ def get_score(y_true, y_pred):
 
 conf_dict = {'batch_size': 8,#32, 
              'epoch': 30,
-             'image_size': 128,#640,
+             'high': 256,#640,
+             'width': 1638,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
              'fold': 0, 
@@ -102,7 +103,7 @@ class SETIDataModule(pl.LightningDataModule):
             valid_df = df[df['fold'] == self.conf.fold]
             
             train_transform = A.Compose([
-                        A.Resize(height=self.conf.image_size, width=self.conf.image_size, interpolation=1), 
+                        A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         #A.HorizontalFlip(p=0.5),
                         #A.ShiftScaleRotate(p=0.5),
                         #A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=10, val_shift_limit=10, p=0.7),
@@ -126,12 +127,12 @@ class SETIDataModule(pl.LightningDataModule):
                         #], p=0.2),
                         #A.IAAPiecewiseAffine(p=0.2),
                         #A.IAASharpen(p=0.2),
-                        A.Cutout(max_h_size=int(self.conf.image_size * 0.1), max_w_size=int(self.conf.image_size * 0.1), num_holes=5, p=0.5),
+                        A.Cutout(max_h_size=int(self.conf.high * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
                         #A.Normalize()
                         ])
 
             valid_transform = A.Compose([
-                        A.Resize(height=self.conf.image_size, width=self.conf.image_size, interpolation=1, always_apply=False, p=1.0),
+                        A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
 
@@ -142,7 +143,7 @@ class SETIDataModule(pl.LightningDataModule):
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
             test_df['dir'] = os.path.join(self.conf.data_dir, "test")
             test_transform = A.Compose([
-                        A.Resize(height=self.conf.image_size, width=self.conf.image_size, interpolation=1, always_apply=False, p=1.0),
+                        A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1, always_apply=False, p=1.0),
                         #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
             self.test_dataset = SETIDataset(test_df, transform=test_transform)
