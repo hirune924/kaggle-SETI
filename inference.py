@@ -180,7 +180,7 @@ def inference(models, test_loader):
     probs = []
     with torch.no_grad():
       for i, (images) in tk0:
-          images = images.cuda()
+          images = images[0].cuda()
           avg_preds = []
           for model in models:
               y_preds = model(images)
