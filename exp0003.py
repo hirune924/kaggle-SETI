@@ -192,7 +192,7 @@ class LitSystem(pl.LightningModule):
         index = torch.randperm(batch_size)
         x = lam * x + (1 - lam) * x[index, :]
         #y = lam * y +  (1 - lam) * y[index]
-        y = y | y[index]
+        y = y + y[index] - (y * y[index])
         
         y_hat = self.model(x)
         loss = self.criteria(y_hat, y)
