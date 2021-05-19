@@ -24,6 +24,7 @@ import timm
 from omegaconf import OmegaConf
 
 import glob
+from tqdm import tqdm
 
 from sklearn.metrics import roc_auc_score
 ####################
