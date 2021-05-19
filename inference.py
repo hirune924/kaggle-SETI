@@ -218,7 +218,7 @@ def main():
 
     data_module = SETIDataModule(conf)
     data_module.setup(stage='test')
-    test_dataset = self.test_dataset
+    test_dataset = data_module.test_dataset
     test_loader =  DataLoader(test_dataset, batch_size=conf.batch_size, num_workers=4, shuffle=False, pin_memory=True, drop_last=False)
     
     predictions = inference(models, test_loader)
