@@ -110,11 +110,11 @@ class SETIDataModule(pl.LightningDataModule):
                         #A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=10, val_shift_limit=10, p=0.7),
                         #A.RandomBrightnessContrast(brightness_limit=(-0.2,0.2), contrast_limit=(-0.2, 0.2), p=0.7),
                         #A.CLAHE(clip_limit=(1,4), p=0.5),
-                        A.OneOf([
-                            A.OpticalDistortion(),
+                        #A.OneOf([
+                        #    A.OpticalDistortion(),
                             A.GridDistortion(num_steps=6),
-                            A.ElasticTransform(),
-                        ], p=0.50),
+                        #    A.ElasticTransform(),
+                        #], p=0.50),
                         #A.OneOf([
                         #    A.GaussNoise(var_limit=[10, 50]),
                         #    A.GaussianBlur(),
