@@ -111,9 +111,9 @@ class SETIDataModule(pl.LightningDataModule):
                         #A.RandomBrightnessContrast(brightness_limit=(-0.2,0.2), contrast_limit=(-0.2, 0.2), p=0.7),
                         #A.CLAHE(clip_limit=(1,4), p=0.5),
                         A.OneOf([
-                            A.OpticalDistortion(distort_limit=1.0),
-                            A.GridDistortion(num_steps=6, distort_limit=1.),
-                            A.ElasticTransform(alpha=3),
+                            A.OpticalDistortion(),
+                            A.GridDistortion(num_steps=6),
+                            A.ElasticTransform(),
                         ], p=0.50),
                         #A.OneOf([
                         #    A.GaussNoise(var_limit=[10, 50]),
