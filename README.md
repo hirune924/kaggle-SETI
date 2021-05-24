@@ -1,4 +1,8 @@
 # kaggle-SETI
+
+## exp0006
+* exp0005 + タイルの順番AAABCD
+* 
 ## exp0005
 * exp0003 + drop_rate + drop_path_rate
 
