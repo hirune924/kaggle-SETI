@@ -27,6 +27,8 @@ import glob
 from tqdm import tqdm
 
 from sklearn.metrics import roc_auc_score
+
+import torch
 ####################
 # Utils
 ####################
@@ -44,6 +46,43 @@ def load_pytorch_model(ckpt_name, model, ignore_suffix='model'):
         new_state_dict[name] = v
     model.load_state_dict(new_state_dict, strict=False)
     return model
+
+def rot180(input: torch.Tensor) -> torch.Tensor:
+    r"""Rotate a tensor image or a batch of tensor images
+    180 degrees. Input must be a tensor of shape (C, H, W)
+    or a batch of tensors :math:`(*, C, H, W)`.
+    Args:
+        input (torch.Tensor): input tensor
+    Returns:
+        torch.Tensor: The rotated image tensor
+    """
+
+    return torch.flip(input, [-2, -1])
+
+
+def hflip(input: torch.Tensor) -> torch.Tensor:
+    r"""Horizontally flip a tensor image or a batch of tensor images. Input must
+    be a tensor of shape (C, H, W) or a batch of tensors :math:`(*, C, H, W)`.
+    Args:
+        input (torch.Tensor): input tensor
+    Returns:
+        torch.Tensor: The horizontally flipped image tensor
+    """
+    w = input.shape[-1]
+    return input[..., torch.arange(w - 1, -1, -1, device=input.device)]
+
+
+def vflip(input: torch.Tensor) -> torch.Tensor:
+    r"""Vertically flip a tensor image or a batch of tensor images. Input must
+    be a tensor of shape (C, H, W) or a batch of tensors :math:`(*, C, H, W)`.
+    Args:
+        input (torch.Tensor): input tensor
+    Returns:
+        torch.Tensor: The vertically flipped image tensor
+    """
+
+    h = input.shape[-2]
+    return input[..., torch.arange(h - 1, -1, -1, device=input.device), :]
 ####################
 # Config
 ####################
@@ -119,36 +158,11 @@ class SETIDataModule(pl.LightningDataModule):
             
             train_transform = A.Compose([
                         A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
-                        #A.HorizontalFlip(p=0.5),
-                        #A.ShiftScaleRotate(p=0.5),
-                        #A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=10, val_shift_limit=10, p=0.7),
-                        #A.RandomBrightnessContrast(brightness_limit=(-0.2,0.2), contrast_limit=(-0.2, 0.2), p=0.7),
-                        #A.CLAHE(clip_limit=(1,4), p=0.5),
-                        #A.OneOf([
-                        #    A.OpticalDistortion(distort_limit=1.0),
-                        #    A.GridDistortion(num_steps=5, distort_limit=1.),
-                        #    A.ElasticTransform(alpha=3),
-                        #], p=0.20),
-                        #A.OneOf([
-                        #    A.GaussNoise(var_limit=[10, 50]),
-                        #    A.GaussianBlur(),
-                        #    A.MotionBlur(),
-                        #    A.MedianBlur(),
-                        #], p=0.20),
-                        #A.Resize(size, size),
-                        #A.OneOf([
-                        #    A.JpegCompression(quality_lower=95, quality_upper=100, p=0.50),
-                        #    A.Downscale(scale_min=0.75, scale_max=0.95),
-                        #], p=0.2),
-                        #A.IAAPiecewiseAffine(p=0.2),
-                        #A.IAASharpen(p=0.2),
                         A.Cutout(max_h_size=int(self.conf.high * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
-                        #A.Normalize()
                         ])
 
             valid_transform = A.Compose([
                         A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
-                        #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
 
             self.train_dataset = SETIDataset(train_df, transform=train_transform)
@@ -159,7 +173,6 @@ class SETIDataModule(pl.LightningDataModule):
             test_df['dir'] = os.path.join(self.conf.data_dir, "test")
             test_transform = A.Compose([
                         A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1, always_apply=False, p=1.0),
-                        #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
             self.test_dataset = SETIDataset(test_df, transform=test_transform)
          
@@ -183,7 +196,11 @@ def inference(models, test_loader):
           images = images[0].cuda()
           avg_preds = []
           for model in models:
-              y_preds = model(images)
+              y_preds = model(images)/4.0
+              y_preds += model(hflip(images))/4.0
+              y_preds += model(vflip(images))/4.0
+              y_preds += model(rot180(images))/4.0
+            
               avg_preds.append(y_preds.sigmoid().to('cpu').numpy())
           avg_preds = np.mean(avg_preds, axis=0)
           probs.append(avg_preds)
