@@ -1,5 +1,7 @@
 # kaggle-SETI
-
+## exp0007
+* exp0005 + resize(512,512) by PL
+*
 ## exp0006
 * exp0005 + タイルの順番AAABCD
 * 
