@@ -45,3 +45,4 @@
 * 細い特徴が消えないような拡大resize
 * dataloadder乱数対処
 * rank averaging
+* メトリックラーニング異常検知ベース
