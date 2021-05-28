@@ -43,7 +43,8 @@
 * ノイズ除去
 * 人工スペクトルノイズ付与aug
 * 人工宇宙人特徴augmentation
-* 疑似ラベル
+* 疑似ラベル 半教師
+* 入力画像に宇宙人特徴を強調する処理
 * 細い特徴が消えないような拡大resize
 * dataloadder乱数対処
 * rank averaging
