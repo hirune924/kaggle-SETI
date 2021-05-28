@@ -108,7 +108,7 @@ conf_base = OmegaConf.create(conf_dict)
 
 class SETIDataset(Dataset):
     def __init__(self, df, transform=None):
-        self.df = df.reset_index(drop=True)
+        self.df = df.reset_index(drop=True)[:400]
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
@@ -122,7 +122,7 @@ class SETIDataset(Dataset):
         
         image = np.load(file_path)
         image = image.astype(np.float32)
-        image = np.vstack(image[[0,2,4,1,3,5]]).transpose((1, 0))
+        image = np.vstack(image).transpose((1, 0))
         
         img_pl = Image.fromarray(image).resize((image.shape[0]*2, image.shape[0]*2), resample=Image.BICUBIC)
         image = np.array(img_pl)
@@ -245,7 +245,7 @@ def main():
 
     data_module = SETIDataModule(conf)
     data_module.setup(stage='test')
-    test_dataset = data_module.test_dataset[:400]
+    test_dataset = data_module.test_dataset
     test_loader =  DataLoader(test_dataset, batch_size=conf.batch_size, num_workers=4, shuffle=False, pin_memory=True, drop_last=False)
     
     predictions = inference(models, test_loader)
