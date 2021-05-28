@@ -108,7 +108,7 @@ conf_base = OmegaConf.create(conf_dict)
 
 class SETIDataset(Dataset):
     def __init__(self, df, transform=None):
-        self.df = df.reset_index(drop=True)[:400]
+        self.df = df.reset_index(drop=True)
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
