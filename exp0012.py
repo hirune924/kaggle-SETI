@@ -73,9 +73,9 @@ class SETIDataset(Dataset):
         bcd = np.vstack(bcd).transpose((1, 0)) # (1638, 256) -> (256, 1638)
         aaa = np.vstack(aaa).transpose((1, 0))
         image = np.asarray([aaa, bcd]).transpose(1,2,0)
-        print(image.shape)
+        #print(image.shape)
         
-        image = cv2.resize(image, (image.shape[1]*2, image.shape[1]*2), interpolation=cv2.INTER_CUBIC)
+        image = cv2.resize(image, (image.shape[0]*2, image.shape[0]*2), interpolation=cv2.INTER_CUBIC)
         #image = image.transpose(2,0,1)
 
         if self.transform is not None:
