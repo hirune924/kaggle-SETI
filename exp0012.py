@@ -66,7 +66,7 @@ class SETIDataset(Dataset):
         img_id = self.df.loc[idx, 'id']
         file_path = os.path.join(self.dir_names[idx],"{}/{}.npy".format(img_id[0], img_id))
         
-        image = np.load(self.df.loc[i, 'file_path']) # (6, 273, 256)
+        image = np.load(file_path)
         image = image.astype(np.float32)
         bcd = image[[1,3,5]]
         aaa = image[[0,2,4]]
