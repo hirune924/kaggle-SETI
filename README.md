@@ -4,6 +4,12 @@
 * 大きいモデルでブーストするのを期待する
 * 何かしらの工夫でcv0.995目指す
 
+## exp0014
+* exp0007 + rocaucloss
+
+## exp0013
+* exp0007 + auclib
+
 ## exp0012
 * exp0007 + input[aaa,bcd]
 
