@@ -51,7 +51,10 @@ class RocAucLoss(nn.Module):
         y_pred = torch.sigmoid(y_pred).clamp(eps, 1 - eps)
         pos = y_pred[y_true == 1]
         neg = y_pred[y_true == 0]
-
+        
+        if (len(pos) == 0 or len(neg) == 0):
+            return torch.zeros([1])[0].type_as(y_pred)
+        
         pos = torch.unsqueeze(pos, 0)
         neg = torch.unsqueeze(neg, 1)
 
@@ -271,7 +274,7 @@ def main():
         amp_level='O2',
         precision=16,
         num_sanity_val_steps=10,
-        val_check_interval=1.0
+        val_check_interval=1.0,
             )
 
     trainer.fit(lit_model, data_module)
