@@ -2,6 +2,7 @@
 # Import Libraries
 ####################
 import os
+os.system('pip install libauc')
 import sys
 from PIL import Image
 import cv2
