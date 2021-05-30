@@ -8,7 +8,7 @@
 * exp0007 + rocaucloss
 
 ## exp0013
-* exp0007 + auclib
+* exp0007 + libauc
 
 ## exp0012
 * exp0007 + input[aaa,bcd]
