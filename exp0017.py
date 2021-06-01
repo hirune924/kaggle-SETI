@@ -159,7 +159,7 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
         
         label = torch.tensor([self.labels[idx]]).float()
-        if self.train and label == 0 and np.random.rand()>0.5:
+        if self.train and label == 0 and np.random.rand()>0.9:
             mode = np.random.choice(['line', 'chirp-1'])
             image, flag = draw_line(image, mode=mode)
             if flag:
@@ -276,7 +276,7 @@ class LitSystem(pl.LightningModule):
         x, y = batch
         
         # mixup
-        alpha = 0.5
+        alpha = 1.0
         lam = np.random.beta(alpha, alpha)
         batch_size = x.size()[0]
         index = torch.randperm(batch_size)
