@@ -235,7 +235,7 @@ def main():
         
     models = []
     for ckpt in model_path:
-      m = timm.create_model(model_name=conf.model_name, num_classes=1, pretrained=False, in_chans=2)
+      m = timm.create_model(model_name=conf.model_name, num_classes=1, pretrained=False, in_chans=6)
       m = load_pytorch_model(ckpt, m, ignore_suffix='model')
       m.cuda()
       m.eval()
