@@ -14,27 +14,33 @@
 
 ## exp0015
 * exp0007 + input[a,b,a,c,a,d]
+* クソすぎた
 
 ## exp0014
 * exp0007 + rocaucloss
 
 ## exp0013
 * exp0007 + libauc
+* 全然学習せんかった
 
 ## exp0012
 * exp0007 + input[aaa,bcd]
+* 謎に良かった
 
 ## exp0011
 * exp0007 + (image - median_img)
+* 微妙
 
 ## exp0010
 * exp0007 + resize(768,768) by PL
+* 画像サイズ上げるよりモデル大きくした方がまだ効果ありそう
 
 ## exp0009
 * exp0007 + eff b3
 
 ## exp0008
 * exp0007 + タイルの順番AAABCD
+* あんまり変わらなかった（微下げ）けどアンサンブル要員にはなりそう
 
 ## exp0007
 * exp0005 + resize(512,512) by PL
