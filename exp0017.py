@@ -188,7 +188,7 @@ class SETIDataset(Dataset):
 # Data Module
 ####################
 def worker_init_fn(worker_id):                                                          
-    np.random.seed(np.random.get_state()[1][0] + worker_id + int(time.time()))
+    np.random.seed(np.random.get_state()[1][0] + worker_id + int(time.time())%99999)
 
 class SETIDataModule(pl.LightningDataModule):
 
