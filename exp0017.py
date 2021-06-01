@@ -141,11 +141,12 @@ conf_base = OmegaConf.create(conf_dict)
 ####################
 
 class SETIDataset(Dataset):
-    def __init__(self, df, transform=None):
+    def __init__(self, df, transform=None, train=True):
         self.df = df.reset_index(drop=True)
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
+        self.train = train
         
     def __len__(self):
         return len(self.df)
@@ -158,13 +159,11 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
         
         label = torch.tensor([self.labels[idx]]).float()
-        
-        if label == 0:
-            if np.random.rand()>0.5:
-                mode = np.random.choice(['line', 'chirp-1'])
-                image, flag = draw_line(image, mode=mode)
-                if flag:
-                    label = torch.tensor([1]).float()
+        if self.train and label == 0 and np.random.rand()>0.5:
+            mode = np.random.choice(['line', 'chirp-1'])
+            image, flag = draw_line(image, mode=mode)
+            if flag:
+                label = torch.tensor([1]).float()
         
         
         bcd = image[[1,3,5]]
@@ -218,30 +217,7 @@ class SETIDataModule(pl.LightningDataModule):
             train_transform = A.Compose([
                         #A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         A.Flip(p=0.5),
-                        #A.HorizontalFlip(p=0.5),
-                        #A.ShiftScaleRotate(p=0.5),
-                        #A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=10, val_shift_limit=10, p=0.7),
-                        #A.RandomBrightnessContrast(brightness_limit=(-0.2,0.2), contrast_limit=(-0.2, 0.2), p=0.7),
-                        #A.CLAHE(clip_limit=(1,4), p=0.5),
-                        #A.OneOf([
-                        #    A.OpticalDistortion(distort_limit=1.0),
-                        #    A.GridDistortion(num_steps=5, distort_limit=1.),
-                        #    A.ElasticTransform(alpha=3),
-                        #], p=0.20),
-                        #A.OneOf([
-                        #    A.GaussNoise(var_limit=[10, 50]),
-                        #    A.GaussianBlur(),
-                        #    A.MotionBlur(),
-                        #    A.MedianBlur(),
-                        #], p=0.20),
-                        #A.Resize(size, size),
-                        #A.OneOf([
-                        #    A.JpegCompression(quality_lower=95, quality_upper=100, p=0.50),
-                        #    A.Downscale(scale_min=0.75, scale_max=0.95),
-                        #], p=0.2),
-                        #A.IAAPiecewiseAffine(p=0.2),
-                        #A.IAASharpen(p=0.2),
-                        A.Cutout(max_h_size=int(self.conf.high * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
+                        #A.Cutout(max_h_size=int(self.conf.high * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
                         #A.Normalize()
                         ])
 
@@ -250,8 +226,8 @@ class SETIDataModule(pl.LightningDataModule):
             #            #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
             #            ])
 
-            self.train_dataset = SETIDataset(train_df, transform=train_transform)
-            self.valid_dataset = SETIDataset(valid_df, transform=None)
+            self.train_dataset = SETIDataset(train_df, transform=train_transform, train=True)
+            self.valid_dataset = SETIDataset(valid_df, transform=None, train=False)
             
         elif stage == 'test':
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
@@ -300,13 +276,13 @@ class LitSystem(pl.LightningModule):
         x, y = batch
         
         # mixup
-        alpha = 1.0
+        alpha = 0.5
         lam = np.random.beta(alpha, alpha)
         batch_size = x.size()[0]
         index = torch.randperm(batch_size)
         x = lam * x + (1 - lam) * x[index, :]
-        #y = lam * y +  (1 - lam) * y[index]
-        y = y + y[index] - (y * y[index])
+        y = lam * y +  (1 - lam) * y[index]
+        #y = y + y[index] - (y * y[index])
         
         y_hat = self.model(x)
         loss = self.criteria(y_hat, y)
