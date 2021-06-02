@@ -17,7 +17,7 @@
 
 
 ## exp0018
-* exp0012 + fixmatch
+* exp0012 + noise
 
 ## exp0017
 * exp0012 + line aug
