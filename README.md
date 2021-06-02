@@ -15,6 +15,10 @@
 * fixmatch & noisy student
 * SWA的なの
 
+
+## exp0018
+* exp0012 + fixmatch
+
 ## exp0017
 * exp0012 + line aug
 
