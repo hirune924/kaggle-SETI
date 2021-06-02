@@ -74,7 +74,8 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
         
         if self.train:
-            pass
+            image += torch.normal(0,torch.rand(1)[0]/2+0.0001,size=image.shape).numpy()
+            image = image/np.std(image)
         
         bcd = image[[1,3,5]]
         aaa = image[[0,2,4]]
@@ -183,10 +184,6 @@ class LitSystem(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         x, y = batch
-        
-        # add noise
-        x = x + torch.normal(0,torch.rand(1)[0]/4+0.26,size=x.size()).type_as(x)
-        x = x/torch.std(x)
         
         # mixup
         alpha = 1.0
