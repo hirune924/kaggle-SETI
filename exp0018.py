@@ -74,7 +74,7 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
         
         if self.train:
-            image += np.random.normal(0, np.random.random()+0.5, image.shape)
+            image += torch.normal(0,torch.rand(1)[0]+0.5,size=image.shape).numpy()
             image = image/np.std(image)
         
         bcd = image[[1,3,5]]
