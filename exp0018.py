@@ -185,7 +185,7 @@ class LitSystem(pl.LightningModule):
         x, y = batch
         
         # add noise
-        x = x + torch.normal(0,torch.rand(1)[0]+0.5,size=x.size()).type_as(x)
+        x = x + torch.normal(0,torch.rand(1)[0]/4+0.26,size=x.size()).type_as(x)
         x = x/torch.std(x)
         
         # mixup
