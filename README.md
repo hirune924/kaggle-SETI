@@ -15,6 +15,8 @@
 * fixmatch & noisy student
 * SWA的なの
 
+## exp0019
+* exp0018 + fixmatch
 
 ## exp0018
 * exp0012 + noise
