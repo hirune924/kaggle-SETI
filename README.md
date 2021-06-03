@@ -15,6 +15,9 @@
 * fixmatch & noisy student
 * SWA的なの
 
+## exp0021
+* exp0012 + seresnet18(stride=1)
+
 ## exp0020
 * exp0012からのSWA
 
