@@ -15,6 +15,9 @@
 * fixmatch & noisy student
 * SWA的なの
 
+## exp0020
+* exp0012からのSWA
+
 ## exp0019
 * exp0012 + pseudo label
 
