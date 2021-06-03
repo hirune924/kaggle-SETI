@@ -42,8 +42,8 @@ conf_dict = {'batch_size': 8,#32,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
              'fold': 0,
-             'drop_rate': 0.3,
-             'drop_path_rate': 0.3,
+             'drop_rate': 0.2,
+             'drop_path_rate': 0.2,
              'data_dir': '../input/seti-breakthrough-listen',
              'output_dir': './'}
 conf_base = OmegaConf.create(conf_dict)
@@ -116,7 +116,7 @@ class SETIDataModule(pl.LightningDataModule):
             
             df_pseudo = pd.read_csv('blend-22021154-092-082-049-077-069.csv')
             df_pseudo['dir'] = os.path.join(self.conf.data_dir, "test")
-            df_pseudo = df_pseudo[(df_pseudo['target']>0.95) | (df_pseudo['target']<0.05)]
+            df_pseudo = df_pseudo[(df_pseudo['target']>0.95) | (df_pseudo['target']<0.02)]
             
             train_df = pd.concat([train_df, df_pseudo])
             
