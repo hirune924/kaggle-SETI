@@ -265,7 +265,7 @@ def main():
     checkpoint_callback = ModelCheckpoint(dirpath=os.path.join(conf.output_dir, 'ckpt/'), monitor='val_score', 
                                           save_last=True, save_top_k=5, mode='max', 
                                           save_weights_only=True, filename=f'fold{conf.fold}-'+'{epoch}-{val_score:.5f}')
-    swa_callback = StochasticWeightAveraging(swa_epoch_start=0, swa_lrs=conf.lr*0.1, annealing_epochs=0, annealing_strategy='cos')
+    swa_callback = StochasticWeightAveraging(swa_epoch_start=1, swa_lrs=conf.lr*0.1, annealing_epochs=1, annealing_strategy='cos')
 
     data_module = SETIDataModule(conf)
 
