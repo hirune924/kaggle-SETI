@@ -16,7 +16,7 @@
 * SWA的なの
 
 ## exp0019
-* exp0018 + fixmatch
+* exp0012 + pseudo label
 
 ## exp0018
 * exp0012 + noise
