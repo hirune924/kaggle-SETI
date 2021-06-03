@@ -42,8 +42,8 @@ conf_dict = {'batch_size': 8,#32,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
              'fold': 0,
-             'drop_rate': 0.2,
-             'drop_path_rate': 0.2,
+             'drop_rate': 0.3,
+             'drop_path_rate': 0.3,
              'data_dir': '../input/seti-breakthrough-listen',
              'output_dir': './'}
 conf_base = OmegaConf.create(conf_dict)
