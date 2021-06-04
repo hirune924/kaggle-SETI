@@ -162,8 +162,8 @@ class SETIDataModule(pl.LightningDataModule):
             #            #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
             #            ])
 
-            self.train_dataset = SETIDataset(train_df, transform=train_transform, self.conf)
-            self.valid_dataset = SETIDataset(valid_df, transform=None, self.conf)
+            self.train_dataset = SETIDataset(train_df, transform=train_transform, conf=self.conf)
+            self.valid_dataset = SETIDataset(valid_df, transform=None, conf=self.conf)
             
         elif stage == 'test':
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
@@ -172,7 +172,7 @@ class SETIDataModule(pl.LightningDataModule):
                         A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1, always_apply=False, p=1.0),
                         #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
-            self.test_dataset = SETIDataset(test_df, transform=test_transform, self.conf)
+            self.test_dataset = SETIDataset(test_df, transform=test_transform, conf=self.conf)
          
     def train_dataloader(self):
         return DataLoader(self.train_dataset, batch_size=self.conf.batch_size, num_workers=4, shuffle=True, pin_memory=True, drop_last=True)
