@@ -198,14 +198,15 @@ class LitSystem(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         
-        # mixup
-        alpha = 1.0
-        lam = np.random.beta(alpha, alpha)
-        batch_size = x.size()[0]
-        index = torch.randperm(batch_size)
-        x = lam * x + (1 - lam) * x[index, :]
-        #y = lam * y +  (1 - lam) * y[index]
-        y = y + y[index] - (y * y[index])
+        if self.current_epoch < self.hparams.epoch*0.8:
+            # mixup
+            alpha = 1.0
+            lam = np.random.beta(alpha, alpha)
+            batch_size = x.size()[0]
+            index = torch.randperm(batch_size)
+            x = lam * x + (1 - lam) * x[index, :]
+            #y = lam * y +  (1 - lam) * y[index]
+            y = y + y[index] - (y * y[index])
         
         y_hat = self.model(x)
         loss = self.criteria(y_hat, y)
