@@ -48,7 +48,7 @@ def load_pytorch_model(ckpt_name, model, ignore_suffix='model'):
 
 conf_dict = {'batch_size': 8,#32, 
              'epoch': 30,
-             'high': 512,#640,
+             'height': 512,#640,
              'width': 512,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
@@ -165,7 +165,7 @@ class SETIDataModule(pl.LightningDataModule):
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
             test_df['dir'] = os.path.join(self.conf.data_dir, "test")
             test_transform = A.Compose([
-                        A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1, always_apply=False, p=1.0),
+                        A.Resize(height=self.conf.height, width=self.conf.width, interpolation=1, always_apply=False, p=1.0),
                         #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
                         ])
             self.test_dataset = SETIDataset(test_df, transform=test_transform, conf=self.conf)
