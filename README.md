@@ -17,9 +17,12 @@
 
 ## exp0023
 * exp0007, vertical flipに変更, 最後の2割のepochはmixup切る
+### run0
 
 ## exp0022
 * exp0012, 最後の2割のepochはmixup切る
+### run0
+
 
 # 煮詰まったから仕切り直しーーーーーーーーーーーーーーーーーーーーーーー
 ## exp0021
