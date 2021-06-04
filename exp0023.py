@@ -149,7 +149,7 @@ class SETIDataModule(pl.LightningDataModule):
                         #], p=0.2),
                         #A.IAAPiecewiseAffine(p=0.2),
                         #A.IAASharpen(p=0.2),
-                        A.Cutout(max_h_size=int(self.conf.high * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
+                        A.Cutout(max_h_size=int(self.conf.height * 0.1), max_w_size=int(self.conf.width * 0.1), num_holes=5, p=0.5),
                         #A.Normalize()
                         ])
 
