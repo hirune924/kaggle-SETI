@@ -179,8 +179,8 @@ class LitSystem(pl.LightningModule):
         super().__init__()
         #self.conf = conf
         self.save_hyperparameters(conf)
-        self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=2,
-                                       drop_rate=self.hparams.drop_rate)#, drop_path_rate=self.hparams.drop_path_rate)
+        self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=2)
+                                      # drop_rate=self.hparams.drop_rate)#, drop_path_rate=self.hparams.drop_path_rate)
         state_dict = self.model.state_dict()
         self.model.layer0.conv1 = torch.nn.Conv2d(3, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
         self.model.pool0 = torch.nn.MaxPool2d(kernel_size=3, stride=1, padding=0, dilation=1, ceil_mode=False)
