@@ -16,10 +16,10 @@
 * SWA的なの
 
 ## exp0023
-* exp0007, vertical flipに変更
+* exp0007, vertical flipに変更, 最後の2割のepochはmixup切る
 
 ## exp0022
-* exp0012
+* exp0012, 最後の2割のepochはmixup切る
 
 # 煮詰まったから仕切り直しーーーーーーーーーーーーーーーーーーーーーーー
 ## exp0021
