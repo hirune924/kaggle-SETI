@@ -31,6 +31,17 @@ from sklearn.metrics import roc_auc_score
 def get_score(y_true, y_pred):
     score = roc_auc_score(y_true, y_pred)
     return score
+
+def load_pytorch_model(ckpt_name, model, ignore_suffix='model'):
+    state_dict = torch.load(ckpt_name, map_location='cpu')["state_dict"]
+    new_state_dict = {}
+    for k, v in state_dict.items():
+        name = k
+        if name.startswith(str(ignore_suffix)+"."):
+            name = name.replace(str(ignore_suffix)+".", "", 1)  # remove `model.`
+        new_state_dict[name] = v
+    model.load_state_dict(new_state_dict, strict=False)
+    return model
 ####################
 # Config
 ####################
@@ -45,6 +56,7 @@ conf_dict = {'batch_size': 8,#32,
              'drop_rate': 0.2,
              'drop_path_rate': 0.2,
              'data_dir': '../input/seti-breakthrough-listen',
+             'model_path': None,
              'output_dir': './'}
 conf_base = OmegaConf.create(conf_dict)
 
@@ -181,6 +193,9 @@ class LitSystem(pl.LightningModule):
         self.save_hyperparameters(conf)
         self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=2,
                                        drop_rate=self.hparams.drop_rate, drop_path_rate=self.hparams.drop_path_rate)
+        if self.hparams.model_path is not None:
+            print(f'load model path: {self.hparams.model_path}')
+            self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
         self.criteria = torch.nn.BCEWithLogitsLoss()
 
     def forward(self, x):
