@@ -16,7 +16,7 @@
 * SWA的なの
 
 ## exp0023
-* exp0007
+* exp0007, vertical flipに変更
 
 ## exp0022
 * exp0012
