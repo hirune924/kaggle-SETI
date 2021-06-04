@@ -15,6 +15,13 @@
 * fixmatch & noisy student
 * SWA的なの
 
+## exp0023
+* exp0007
+
+## exp0022
+* exp0012
+
+# 煮詰まったから仕切り直しーーーーーーーーーーーーーーーーーーーーーーー
 ## exp0021
 * exp0012 + seresnet18(stride=1)
 
