@@ -39,11 +39,11 @@ conf_dict = {'batch_size': 8,#32,
              'epoch': 30,
              'high': 512,#640,
              'width': 512,
-             'model_name': 'legacy_seresnet18',
+             'model_name': 'efficientnet_b0',
              'lr': 0.001,
              'fold': 0,
-             'drop_rate': 0.0,
-             'drop_path_rate': 0.0,
+             'drop_rate': 0.2,
+             'drop_path_rate': 0.2,
              'data_dir': '../input/seti-breakthrough-listen',
              'output_dir': './'}
 conf_base = OmegaConf.create(conf_dict)
@@ -182,8 +182,8 @@ class LitSystem(pl.LightningModule):
         self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=2)
                                       # drop_rate=self.hparams.drop_rate)#, drop_path_rate=self.hparams.drop_path_rate)
         state_dict = self.model.state_dict()
-        self.model.layer0.conv1 = torch.nn.Conv2d(2, 64, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
-        self.model.pool0 = torch.nn.MaxPool2d(kernel_size=3, stride=1, padding=0, dilation=1, ceil_mode=False)
+        self.model.conv_stem = torch.nn.Conv2d(2, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        #self.model.pool0 = torch.nn.MaxPool2d(kernel_size=3, stride=1, padding=0, dilation=1, ceil_mode=False)
         self.model.load_state_dict(state_dict, strict=True)
         
         self.criteria = torch.nn.BCEWithLogitsLoss()
