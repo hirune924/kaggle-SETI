@@ -90,8 +90,8 @@ def vflip(input: torch.Tensor) -> torch.Tensor:
 
 conf_dict = {'batch_size': 8,#32, 
              'epoch': 30,
-             'high': 256,#640,
-             'width': 1638,
+             'high': 512,#640,
+             'width': 512,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
              'fold': 0, 
