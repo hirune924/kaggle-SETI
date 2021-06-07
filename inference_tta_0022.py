@@ -90,7 +90,7 @@ def vflip(input: torch.Tensor) -> torch.Tensor:
 
 conf_dict = {'batch_size': 8,#32, 
              'epoch': 30,
-             'high': 512,#640,
+             'height': 512,#640,
              'width': 512,
              'model_name': 'efficientnet_b0',
              'lr': 0.001,
@@ -106,11 +106,12 @@ conf_base = OmegaConf.create(conf_dict)
 ####################
 
 class SETIDataset(Dataset):
-    def __init__(self, df, transform=None):
+    def __init__(self, df, transform=None, conf=None):
         self.df = df.reset_index(drop=True)
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
+        self.conf = conf
         
     def __len__(self):
         return len(self.df)
@@ -128,7 +129,7 @@ class SETIDataset(Dataset):
         image = np.asarray([aaa, bcd]).transpose(1,2,0)
         #print(image.shape)
         
-        image = cv2.resize(image, (image.shape[0]*2, image.shape[0]*2), interpolation=cv2.INTER_CUBIC)
+        image = cv2.resize(image, (self.conf.height, self.conf.width), interpolation=cv2.INTER_CUBIC)
         #image = image.transpose(2,0,1)
 
         if self.transform is not None:
@@ -176,13 +177,14 @@ class SETIDataModule(pl.LightningDataModule):
                         A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         ])
 
-            self.train_dataset = SETIDataset(train_df, transform=train_transform)
-            self.valid_dataset = SETIDataset(valid_df, transform=valid_transform)
+            self.train_dataset = SETIDataset(train_df, transform=train_transform, conf=self.conf)
+            self.valid_dataset = SETIDataset(valid_df, transform=valid_transform, conf=self.conf)
             
         elif stage == 'test':
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
             test_df['dir'] = os.path.join(self.conf.data_dir, "test")
-            self.test_dataset = SETIDataset(test_df, transform=None)
+
+            self.test_dataset = SETIDataset(test_df, transform=None, conf=self.conf)
          
     def train_dataloader(self):
         return DataLoader(self.train_dataset, batch_size=self.conf.batch_size, num_workers=4, shuffle=True, pin_memory=True, drop_last=True)
