@@ -285,7 +285,8 @@ def main():
         amp_level='O2',
         precision=16,
         num_sanity_val_steps=10,
-        val_check_interval=1.0
+        val_check_interval=1.0,
+        accumulate_grad_batches=3
             )
 
     trainer.fit(lit_model, data_module)
