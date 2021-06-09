@@ -286,7 +286,7 @@ def main():
         precision=16,
         num_sanity_val_steps=10,
         val_check_interval=1.0,
-        accumulate_grad_batches=3
+        accumulate_grad_batches=4
             )
 
     trainer.fit(lit_model, data_module)
