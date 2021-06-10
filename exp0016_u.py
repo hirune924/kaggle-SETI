@@ -120,7 +120,7 @@ class SETIDataModule(pl.LightningDataModule):
             train_pos_df = train_df['target'] == 1]
             
             train_df = train_neg_df
-            for i in range(conf.times):
+            for i in range(self.conf.times):
                 train_df = pd.concat([train_df, train_pos_df])
                 
             train_transform = A.Compose([
