@@ -116,8 +116,8 @@ class SETIDataModule(pl.LightningDataModule):
             valid_df = df[df['fold'] == self.conf.fold]
             
             # up sampling
-            train_neg_df = train_df['target'] == 0]
-            train_pos_df = train_df['target'] == 1]
+            train_neg_df = train_df[train_df['target'] == 0]
+            train_pos_df = train_df[train_df['target'] == 1]
             
             train_df = train_neg_df
             for i in range(self.conf.times):
