@@ -83,14 +83,19 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
         bcd = image[[1,3,5]]
         aaa = image[[0,2,4]]
-        abacad = np.vstack(image).transpose((1, 0)) # (1638, 256) -> (256, 1638)
         bcd = np.vstack(bcd).transpose((1, 0)) # (1638, 256) -> (256, 1638)
         aaa = np.vstack(aaa).transpose((1, 0))
-        image = np.asarray([aaa, bcd, abacad]).transpose(1,2,0)
+        image = np.asarray([aaa, bcd]).transpose(1,2,0)
+
+        abacad = np.vstack(image).transpose((1, 0)) # (1638, 256) -> (256, 1638)
+        img_pl = Image.fromarray(abacad).resize((self.conf.height, self.conf.width), resample=Image.BICUBIC)
+        abacad = np.array(img_pl).transpose((1, 0))
+
         #print(image.shape)
         
         image = cv2.resize(image, (self.conf.height, self.conf.width), interpolation=cv2.INTER_CUBIC)
         #image = image.transpose(2,0,1)
+        image = np.concatenate([image, abacad.reshape(self.conf.height, self.conf.width, 1)], axis=2)
 
         if self.transform is not None:
             image = self.transform(image=image)['image']
@@ -194,7 +199,7 @@ class LitSystem(pl.LightningModule):
         super().__init__()
         #self.conf = conf
         self.save_hyperparameters(conf)
-        self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=2,
+        self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=3,
                                        drop_rate=self.hparams.drop_rate, drop_path_rate=self.hparams.drop_path_rate)
         if self.hparams.model_path is not None:
             print(f'load model path: {self.hparams.model_path}')
