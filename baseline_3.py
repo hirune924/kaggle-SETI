@@ -57,7 +57,8 @@ conf_dict = {'batch_size': 8,#32,
              'drop_path_rate': 0.2,
              'data_dir': '../input/seti-breakthrough-listen',
              'model_path': None,
-             'output_dir': './'}
+             'output_dir': './',
+             'trainer': {}}
 conf_base = OmegaConf.create(conf_dict)
 
 ####################
@@ -292,7 +293,8 @@ def main():
         amp_level='O2',
         precision=16,
         num_sanity_val_steps=10,
-        val_check_interval=1.0
+        val_check_interval=1.0,
+        **conf.trainer
             )
 
     trainer.fit(lit_model, data_module)
