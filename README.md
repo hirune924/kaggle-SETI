@@ -3,8 +3,9 @@
 
 
 # 週末の実験結果を踏まえての実験計画
-* inp=1, effv2-m
-* inp=1, effv2-l 
+* inp=1, tf_efficientnetv2_s_in21ft1k(exp008.sh)
+* inp=1, tf_efficientnetv2_m_in21ft1k(exp009.sh)
+* inp=1, tf_efficientnetv2_l_in21ft1k(exp010.sh)
 * パラメータ破壊の対策(warmup, batch size, headだけ先に学習など)
 * 異常検知アプローチ再び
 * ドメインシフトの調査
