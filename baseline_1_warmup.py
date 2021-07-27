@@ -290,8 +290,8 @@ def main():
 
     trainer.fit(lit_model, data_module)
 
-    torch.save(lit_model.model.state_dict(), os.path.join(conf.output_dir, 'tmp.ckpt'))
-    conf.model_path = os.path.join(conf.output_dir, 'tmp.ckpt')
+    torch.save(lit_model.model.state_dict(), os.path.join('/kqi/output', 'tmp.ckpt'))
+    conf.model_path = os.path.join('/kqi/output', 'tmp.ckpt')
     conf.finetune = False
 
     lit_model = LitSystem(conf)
