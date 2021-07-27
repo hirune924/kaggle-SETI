@@ -195,7 +195,7 @@ class LitSystem(pl.LightningModule):
         if self.hparams.model_path is not None:
             print(f'load model path: {self.hparams.model_path}')
             #self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
-            self.model = self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
+            self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
         self.criteria = torch.nn.BCEWithLogitsLoss()
 
     def forward(self, x):
@@ -292,9 +292,9 @@ def main():
     trainer.fit(lit_model, data_module)
 
     torch.save(lit_model.model.state_dict(), os.path.join('/kqi/output', 'tmp.ckpt'))
+
     conf.model_path = os.path.join('/kqi/output', 'tmp.ckpt')
     conf.finetune = False
-
     lit_model = LitSystem(conf)
     # training
     trainer = Trainer(
