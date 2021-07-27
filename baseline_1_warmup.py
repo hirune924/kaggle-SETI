@@ -192,10 +192,14 @@ class LitSystem(pl.LightningModule):
         self.save_hyperparameters(conf)
         self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=1,
                                        drop_rate=self.hparams.drop_rate, drop_path_rate=self.hparams.drop_path_rate)
-        if self.hparams.model_path is not None:
+        
+        if self.hparams.restart:
             print(f'load model path: {self.hparams.model_path}')
-            #self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
-            self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
+            self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
+        else:
+            if self.hparams.model_path is not None:
+                print(f'load model path: {self.hparams.model_path}')
+                self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
         self.criteria = torch.nn.BCEWithLogitsLoss()
 
     def forward(self, x):
@@ -273,28 +277,34 @@ def main():
 
     data_module = SETIDataModule(conf)
 
-    conf.finetune = True
-    lit_model = LitSystem(conf)
-    # fine tune
-    trainer = Trainer(
-        #logger=[tb_logger, csv_logger],
-        #callbacks=[lr_monitor, checkpoint_callback],
-        max_epochs=1,
-        gpus=-1,
-        amp_backend='native',
-        amp_level='O2',
-        precision=16,
-        num_sanity_val_steps=10,
-        val_check_interval=1.0,
-        **conf.trainer
-            )
+    if conf.model_path is None:
+        conf.restart = False
+        conf.finetune = True
+        lit_model = LitSystem(conf)
+        # fine tune
+        trainer = Trainer(
+            #logger=[tb_logger, csv_logger],
+            #callbacks=[lr_monitor, checkpoint_callback],
+            max_epochs=1,
+            gpus=-1,
+            amp_backend='native',
+            amp_level='O2',
+            precision=16,
+            num_sanity_val_steps=10,
+            val_check_interval=1.0,
+            **conf.trainer
+                )
+    
+        trainer.fit(lit_model, data_module)
+    
+        torch.save(lit_model.model.state_dict(), os.path.join('/kqi/output', 'tmp.ckpt'))
+    
+        conf.model_path = os.path.join('/kqi/output', 'tmp.ckpt')
+        conf.finetune = False
+    else:
+        conf.restart = True
+        conf.finetune = False
 
-    trainer.fit(lit_model, data_module)
-
-    torch.save(lit_model.model.state_dict(), os.path.join('/kqi/output', 'tmp.ckpt'))
-
-    conf.model_path = os.path.join('/kqi/output', 'tmp.ckpt')
-    conf.finetune = False
     lit_model = LitSystem(conf)
     # training
     trainer = Trainer(
