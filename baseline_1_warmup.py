@@ -195,7 +195,7 @@ class LitSystem(pl.LightningModule):
         if self.hparams.model_path is not None:
             print(f'load model path: {self.hparams.model_path}')
             #self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
-            self.model = self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'), strict=True)
+            self.model = self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
         self.criteria = torch.nn.BCEWithLogitsLoss()
 
     def forward(self, x):
