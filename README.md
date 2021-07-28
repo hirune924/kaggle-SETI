@@ -1,6 +1,19 @@
 # kaggle-SETI
 
 
+# 次の実験計画
+* inp=1, warmup, tf_efficientnetv2_s_in21ft1k(exp008.sh)
+* inp=1, warmup, tf_efficientnetv2_m_in21ft1k(exp009.sh)
+* inp=1, warmup, tf_efficientnet_b5_ns(exp011.sh)
+* inp=1, hflip, tf_efficientnet_b5_ns(exp012.sh) 
+* stride=1
+* shuffle？
+
+
+# 実験結果
+* efficientnetv2は普通に流すと無学習が発生
+* warmupアプローチは無学習には有効だが精度がどうなっているかは不明
+* 異常検知アプローチはvalidのAUCは落ちる、LBスコアとの乖離具合も同じくらい落ちる
 
 # 週末の実験結果を踏まえての実験計画
 * inp=1, warmup, tf_efficientnetv2_s_in21ft1k(exp008.sh)
@@ -8,7 +21,6 @@
 * パラメータ破壊の対策(warmup, batch size, headだけ先に学習, radamなど)
 * 異常検知アプローチ再び
 * ドメインシフトの調査
-* stride=1
 
  
 # 週末の実験結果を踏まえての仮説
