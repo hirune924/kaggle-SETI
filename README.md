@@ -7,7 +7,8 @@
 * inp=1, warmup, tf_efficientnet_b5_ns(exp011.sh)
 * inp=1, hflip, tf_efficientnet_b5_ns(exp012.sh) 
 * stride=1
-* shuffle？
+* shuffle_cons(exp013.py)
+* shuffle_inv
 
 
 # 実験結果
