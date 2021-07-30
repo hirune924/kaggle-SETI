@@ -1,6 +1,18 @@
 # kaggle-SETI
 
 
+
+# 次の実験計画
+* inp=1, shuffle_cons + inv (exp014.py)
+* inp=1, warmup, shuffle_cons + inv (exp014_w.py)
+* A100でb6？
+* input[aaabcd]？
+* stride=1
+
+
+# 実験結果
+* 結果が分かり次第書く
+
 # 次の実験計画
 * inp=1, warmup, tf_efficientnetv2_s_in21ft1k(exp008.sh)
 * inp=1, warmup, tf_efficientnetv2_m_in21ft1k(exp009.sh)
