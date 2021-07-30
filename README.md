@@ -11,6 +11,7 @@
 
 * stride=1
 * input[aaabcd]？
+* 擬似ラベル
 
 
 # 実験結果
