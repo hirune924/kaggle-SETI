@@ -279,7 +279,7 @@ def main():
         amp_backend='native',
         amp_level='O2',
         precision=16,
-        num_sanity_val_steps=10,
+        num_sanity_val_steps=30,
         val_check_interval=1.0,
         **conf.trainer
             )
