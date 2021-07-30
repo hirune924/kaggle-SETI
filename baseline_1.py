@@ -29,7 +29,10 @@ from sklearn.metrics import roc_auc_score
 # Utils
 ####################
 def get_score(y_true, y_pred):
-    score = roc_auc_score(y_true, y_pred)
+    try:
+        score = roc_auc_score(y_true, y_pred)
+    except:
+        score = 0.0
     return score
 
 def load_pytorch_model(ckpt_name, model, ignore_suffix='model'):
