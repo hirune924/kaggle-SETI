@@ -3,11 +3,14 @@
 
 
 # 次の実験計画
-* inp=1, shuffle_cons + inv (exp014.py)
-* inp=1, warmup, shuffle_cons + inv (exp014_w.py)
-* A100でb6？
-* input[aaabcd]？
+* inp=1, shuffle_cons + inv (exp014.sh)
+* inp=1, warmup, shuffle_cons + inv (exp014_w.sh)
+* inp=2, warmup, shuffle_cons + inv (exp015_w.sh)
+* inp=3, warmup, shuffle_cons + inv (exp016_w.sh)
+* A100でb6 (exp017.sh)
+
 * stride=1
+* input[aaabcd]？
 
 
 # 実験結果
