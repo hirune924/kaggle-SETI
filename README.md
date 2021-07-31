@@ -17,6 +17,7 @@
 * oldデータ使う？？
 * aaa,bcd両方にある時はtarget0?
 * gauss noise再び
+* Unsupervised Domain Adaptation
 
 # 実験結果
 * 結果が分かり次第書く
