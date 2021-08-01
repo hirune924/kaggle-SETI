@@ -20,7 +20,10 @@
 * Unsupervised Domain Adaptation
 
 # 実験結果
-* 結果が分かり次第書く
+* warmupは学習も安定するしスコアも落ちることはないしいいことづくめ
+* v2は微妙（というかb5が良すぎ）
+* shuffleはcv的には良いけどlbは微妙に落ちる（アンサンブル要員くらいにはなる）
+* hflipの効果はよく分からん...（ただlb,cvともにshuffleと同じくらい）
 
 # 次の実験計画
 * inp=1, warmup, tf_efficientnetv2_s_in21ft1k(exp008.sh)
