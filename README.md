@@ -11,13 +11,13 @@
 
 * stride=1
 * input[aaabcd]？
-* 擬似ラベル
+* ☆擬似ラベル
 * bcd落とす
-* 異常検知でtrainにないパターンを弾く
-* oldデータ使う？？
+* ☆異常検知でtrainにないパターンを弾く
+* ☆oldデータ使う？？
 * aaa,bcd両方にある時はtarget0?
-* gauss noise再び
-* Unsupervised Domain Adaptation
+* ☆☆gauss noise再び
+* ☆☆Unsupervised Domain Adaptation
 
 # 実験結果
 * warmupは学習も安定するしスコアも落ちることはないしいいことづくめ
