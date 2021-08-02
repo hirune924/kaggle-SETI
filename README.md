@@ -1,5 +1,19 @@
 # kaggle-SETI
 
+# 次の実験計画
+* ☆☆Unsupervised Domain Adaptation(inference_1_uda.py)
+* ☆☆gauss noise再び(exp018.sh)
+* ☆oldデータ使う？？(exp019.sh)
+* ☆擬似ラベル
+* ☆異常検知でtrainにないパターンを弾く
+* stride=1
+* input[aaabcd]？
+* bcd落とす
+* aaa,bcd両方にある時はtarget0?
+
+
+
+
 # 実験結果
 * チャンネル分けは効果なさそう...（cv的には）
 * shuffle invはcvは良さげに見える

@@ -67,12 +67,13 @@ conf_base = OmegaConf.create(conf_dict)
 ####################
 
 class SETIDataset(Dataset):
-    def __init__(self, df, transform=None, conf=None):
+    def __init__(self, df, transform=None, conf=None, train=True):
         self.df = df.reset_index(drop=True)
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
         self.conf = conf
+        self.train = train
         
     def __len__(self):
         return len(self.df)
@@ -83,7 +84,9 @@ class SETIDataset(Dataset):
         
         image = np.load(file_path)
         image = image.astype(np.float32)
-
+        if self.train:
+            image += torch.normal(0,torch.rand(1)[0]+0.0001,size=image.shape).numpy()
+            image = image/np.std(image)
         image = np.vstack(image).transpose((1, 0))
         
         img_pl = Image.fromarray(image).resize((self.conf.height, self.conf.width), resample=Image.BICUBIC)
@@ -124,8 +127,7 @@ class SETIDataModule(pl.LightningDataModule):
             
             train_df = df[df['fold'] != self.conf.fold]
             valid_df = df[df['fold'] == self.conf.fold]
-
-
+            
             train_transform = A.Compose([
                         #A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         #A.Flip(p=0.5),
@@ -162,8 +164,8 @@ class SETIDataModule(pl.LightningDataModule):
             #            #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
             #            ])
 
-            self.train_dataset = SETIDataset(train_df, transform=train_transform,conf=self.conf)
-            self.valid_dataset = SETIDataset(valid_df, transform=None, conf=self.conf)
+            self.train_dataset = SETIDataset(train_df, transform=train_transform,conf=self.conf, train=True)
+            self.valid_dataset = SETIDataset(valid_df, transform=None, conf=self.conf, train=False)
             
         elif stage == 'test':
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
