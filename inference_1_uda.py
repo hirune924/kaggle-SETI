@@ -213,7 +213,7 @@ def inference(models, test_loader):
     return probs
   
   
-  def gce(logits, target, q = 0.8):
+def gce(logits, target, q = 0.8):
     """ Generalized cross entropy.
     
     Reference: https://arxiv.org/abs/1805.07836
