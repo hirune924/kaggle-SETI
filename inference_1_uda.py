@@ -221,7 +221,8 @@ def gce(logits, target, q = 0.8):
     #probs = torch.nn.functional.softmax(logits, dim=1)
     probs = torch.sigmoid(logits)
     #probs_with_correct_idx = probs.index_select(-1, target).diag()
-    loss = (1. - probs**q) / q
+    #loss = (1. - probs**q) / q
+    loss = 0.25 - (0.5 - probs)^2
     return loss.mean()
 
 def adapt_batchnorm(model):
