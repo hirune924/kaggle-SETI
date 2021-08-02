@@ -9,6 +9,9 @@
 * ☆異常検知でtrainにないパターンを弾く
 * RevGrad (https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/revgrad.py)
 * noisy student
+* FDA?(https://github.com/YanchaoYang/FDA)
+* pixelDA?(https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pixelda/pixelda.py)
+* 
 
 * stride=1
 * input[aaabcd]？
