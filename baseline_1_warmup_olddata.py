@@ -130,7 +130,7 @@ class SETIDataModule(pl.LightningDataModule):
             valid_df = df[df['fold'] == self.conf.fold]
 
             old_train_df = pd.read_csv(os.path.join(self.conf.data_dir, "old_leaky_data/train_labels_old.csv"))
-            old_test_df = pd.read_csv(os.path.join(self.conf.data_dir, "old_leaky_data/train_labels_old.csv"))
+            old_test_df = pd.read_csv(os.path.join(self.conf.data_dir, "old_leaky_data/test_labels_old.csv"))
             old_train_df['dir'] = os.path.join(self.conf.data_dir, "old_leaky_data/train_old")
             old_test_df['dir'] = os.path.join(self.conf.data_dir, "old_leaky_data/test_old")
             
