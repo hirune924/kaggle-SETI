@@ -134,7 +134,7 @@ class SETIDataModule(pl.LightningDataModule):
             old_train_df['dir'] = os.path.join(self.conf.data_dir, "old_leaky_data/train_old")
             old_test_df['dir'] = os.path.join(self.conf.data_dir, "old_leaky_data/test_old")
             
-            train_df = df.concat([train_df, old_train_df, old_test_df])
+            train_df = pd.concat([train_df, old_train_df, old_test_df])
 
             train_transform = A.Compose([
                         #A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
