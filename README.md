@@ -1,6 +1,9 @@
 # kaggle-SETI
 
-
+# 実験結果
+* チャンネル分けは効果なさそう...（cv的には）
+* shuffle invはcvは良さげに見える
+* b6は順当に少しcvは良くなってる感
 
 # 次の実験計画
 * inp=1, shuffle_cons + inv (exp014.sh)
