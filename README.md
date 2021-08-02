@@ -7,6 +7,8 @@
 * ☆aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
 * ☆擬似ラベル
 * ☆異常検知でtrainにないパターンを弾く
+* RevGrad (https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/revgrad.py)
+* noisy student
 
 * stride=1
 * input[aaabcd]？
