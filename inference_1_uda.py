@@ -269,7 +269,8 @@ def main():
         optimizer = torch.optim.SGD(model.parameters(), lr=conf.lr)
         #'''
         for images, _ in tqdm(test_loader, total=len(test_loader)):
-            logits = model(images.cuda())
+            #logits = model(images.cuda())
+            model(images.cuda())
             #predictions = logits.argmax(dim = 1)
             ##predictions = torch.sigmoid(logits)#>0.5
             ##loss = gce(logits, predictions, q=0.8)
