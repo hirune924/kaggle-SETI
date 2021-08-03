@@ -7,10 +7,14 @@
 * ☆aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
 * ☆擬似ラベル
 * ☆異常検知でtrainにないパターンを弾く
-* *-1したreverse sample
+
+* *-1したreverse sample(exp021.sh)
+* 疑似ラベルつかってfinetune
+
+* noisy student
+
 * ADDA(https://www.slideshare.net/YuusukeIwasawa/dl-asymmetric-tritraining-for-unsupervised-domain-adaptation-icml2017-and-neural-domain-adaptation)
 * RevGrad (https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/revgrad.py)
-* noisy student
 * FDA?(https://github.com/YanchaoYang/FDA)
 * pixelDA?(https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pixelda/pixelda.py)
 * AdaMatch

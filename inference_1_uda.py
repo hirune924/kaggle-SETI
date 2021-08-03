@@ -266,17 +266,17 @@ def main():
         model.cuda()
         parameters = adapt_batchnorm(model)
         #print(parameters)
-        optimizer = torch.optim.SGD(model.parameters(), lr=conf.lr)
+        ##optimizer = torch.optim.SGD(model.parameters(), lr=conf.lr)
         #'''
         for images, _ in tqdm(test_loader, total=len(test_loader)):
             logits = model(images.cuda())
             #predictions = logits.argmax(dim = 1)
-            predictions = torch.sigmoid(logits)#>0.5
-            loss = gce(logits, predictions, q=0.8)
+            ##predictions = torch.sigmoid(logits)#>0.5
+            ##loss = gce(logits, predictions, q=0.8)
             #print(loss)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+            ##optimizer.zero_grad()
+            ##loss.backward()
+            ##optimizer.step()
         #'''
         torch.save(model.to('cpu').state_dict(), os.path.join(conf.output_dir, os.path.basename(ckpt)))
         
