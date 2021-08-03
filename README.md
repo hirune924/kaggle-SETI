@@ -12,7 +12,9 @@
 * 疑似ラベルつかってfinetune
 * noisy student
 * 半教師あり(?)
+* nfnet
 
+* unseenについての対策、可視化、GradCAM
 
 * CAN4UDA( https://www.aminer.cn/pub/5c5ce50d17c44a400fc38bf2/contrastive-adaptation-network-for-unsupervised-domain-adaptation )
 * ADDA( https://www.slideshare.net/YuusukeIwasawa/dl-asymmetric-tritraining-for-unsupervised-domain-adaptation-icml2017-and-neural-domain-adaptation )( https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/adda.py )
