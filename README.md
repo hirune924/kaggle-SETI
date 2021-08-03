@@ -13,7 +13,7 @@
 
 * noisy student
 
-* ADDA(https://www.slideshare.net/YuusukeIwasawa/dl-asymmetric-tritraining-for-unsupervised-domain-adaptation-icml2017-and-neural-domain-adaptation)
+* ADDA(https://www.slideshare.net/YuusukeIwasawa/dl-asymmetric-tritraining-for-unsupervised-domain-adaptation-icml2017-and-neural-domain-adaptation)(https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/adda.py)
 * RevGrad (https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/revgrad.py)
 * FDA?(https://github.com/YanchaoYang/FDA)
 * pixelDA?(https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pixelda/pixelda.py)
