@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 
 train_df = pd.read_csv('/kqi/parent/22021621/train_labels.csv')
 test_df = pd.read_csv('pseudo802.csv')
