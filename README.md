@@ -11,7 +11,7 @@
 * *-1したreverse sample(exp021.sh)
 * 疑似ラベルつかってfinetune(exp022.sh)
 * noisy student(exp023.sh)
-* 半教師あり(?)
+* 半教師あり(fixmatch?)(exp025.sh)
 * nfnet(exp024.sh)
 
 * unseenについての対策、可視化、GradCAM
