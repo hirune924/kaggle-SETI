@@ -14,6 +14,7 @@
 * 半教師あり(fixmatch?)(exp025.sh)
 * nfnet(exp024.sh)
 
+* 信号ありとなしの差を予測する？
 * unseenについての対策、可視化、GradCAM
 
 * CAN4UDA( https://www.aminer.cn/pub/5c5ce50d17c44a400fc38bf2/contrastive-adaptation-network-for-unsupervised-domain-adaptation )
