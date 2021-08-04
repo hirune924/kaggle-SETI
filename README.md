@@ -14,6 +14,8 @@
 * 半教師あり(fixmatch?)(exp025.sh)
 * nfnet(exp024.sh)
 
+* testにだけ縦スジ？
+* trainデータにnoisyなシグナルがある？実は信号あるのに0になってるみたいな
 * 信号ありとなしの差を予測する？
 * unseenについての対策、可視化、GradCAM
 
