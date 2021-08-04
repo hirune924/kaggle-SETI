@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-train_df = pd.read_csv('kqi/parent/22021621/train_labels.csv')
+train_df = pd.read_csv('/kqi/parent/22021621/train_labels.csv')
 test_df = pd.read_csv('pseudo802.csv')
 
-train_df['dir'] = 'kqi/parent/22021621/train'
-test_df['dir'] = 'kqi/parent/22021621/test'
+train_df['dir'] = '/kqi/parent/22021621/train'
+test_df['dir'] = '/kqi/parent/22021621/test'
 
 
 idx = 1
