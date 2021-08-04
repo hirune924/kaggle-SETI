@@ -208,6 +208,8 @@ def inference(models, test_loader):
           for model in models:
               y_preds = model(images_aaa)/2.0
               y_preds += model(vflip(images_aaa))/2.0
+              y_preds -= model(vflip(images_bcd))/2.0
+              y_preds -= model(vflip(images_bcd))/2.0
             
               avg_preds.append(y_preds.sigmoid().to('cpu').numpy())
           avg_preds = np.mean(avg_preds, axis=0)
