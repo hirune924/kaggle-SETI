@@ -21,7 +21,7 @@ else:
   
 train_idx = st.slider('Train Index', min_value=0, max_value=len(train_df))
 img_id = train_df.loc[train_idx, 'id']
-st.text(f'TrainImage, id: {img_id}, idx: {train_idx}, target: {train_df.loc[train_idx, 'target']}')
+st.text(f'TrainImage, id: {img_id}, idx: {train_idx}, target: {train_df.loc[train_idx, "target"]}')
 img_path = os.path.join(train_df.loc[train_idx, 'dir'],"{}/{}.npy".format(img_id[0], img_id))
 image = np.load(img_path).astype(np.float32)
 image = np.vstack(image).transpose((1, 0))
@@ -34,7 +34,7 @@ st.pyplot(fig)
 
 test_idx = st.slider('Train Index', min_value=0, max_value=len(test_df))
 img_id = test_df.loc[test_idx, 'id']
-st.text(f'TestImage, id: {img_id}, idx: {test_idx}, target: {test_df.loc[test_idx, 'target']}')
+st.text(f'TestImage, id: {img_id}, idx: {test_idx}, target: {test_df.loc[test_idx, "target"]}')
 img_path = os.path.join(test_df.loc[test_idx, 'dir'],"{}/{}.npy".format(img_id[0], img_id))
 image = np.load(img_path).astype(np.float32)
 image = np.vstack(image).transpose((1, 0))
