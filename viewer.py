@@ -13,11 +13,11 @@ test_df['dir'] = '/kqi/parent/22021621/test'
 
 pos = st.checkbox('neg or pos')
 if pos:
-  train_df = train_df[train_df['target']==1]
-  test_df = test_df[test_df['target']>0.5]
+  train_df = train_df[train_df['target']==1].reset_index()
+  test_df = test_df[test_df['target']>0.5].reset_index()
 else:
-  train_df = train_df[train_df['target']==0]
-  test_df = test_df[test_df['target']<0.5]
+  train_df = train_df[train_df['target']==0].reset_index()
+  test_df = test_df[test_df['target']<0.5].reset_index()
   
 train_idx = st.slider('Train Index', min_value=0, max_value=len(train_df))
 img_id = train_df.loc[train_idx, 'id']
