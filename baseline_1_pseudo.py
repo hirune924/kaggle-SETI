@@ -25,12 +25,14 @@ import timm
 from omegaconf import OmegaConf
 
 from sklearn.metrics import roc_auc_score
-from utils.radam import RAdam
 ####################
 # Utils
 ####################
 def get_score(y_true, y_pred):
-    score = roc_auc_score(y_true, y_pred)
+    try:
+        score = roc_auc_score(y_true, y_pred)
+    except:
+        score = 0.0
     return score
 
 def load_pytorch_model(ckpt_name, model, ignore_suffix='model'):
@@ -83,7 +85,6 @@ class SETIDataset(Dataset):
         
         image = np.load(file_path)
         image = image.astype(np.float32)
-
         image = np.vstack(image).transpose((1, 0))
         
         img_pl = Image.fromarray(image).resize((self.conf.height, self.conf.width), resample=Image.BICUBIC)
@@ -125,7 +126,13 @@ class SETIDataModule(pl.LightningDataModule):
             train_df = df[df['fold'] != self.conf.fold]
             valid_df = df[df['fold'] == self.conf.fold]
 
+            pseudo_df = pd.read_csv("pseudo802.csv")
+            pseudo_df = pseudo_df[(pseudo_df['target']<0.05)|(pseudo_df['target']>0.95)]
 
+            pseudo_df['dir'] = os.path.join(self.conf.data_dir, "test")
+
+            train_df = pd.concat([train_df, pseudo_df])
+            
             train_transform = A.Compose([
                         #A.Resize(height=self.conf.high, width=self.conf.width, interpolation=1), 
                         #A.Flip(p=0.5),
@@ -194,14 +201,9 @@ class LitSystem(pl.LightningModule):
         self.save_hyperparameters(conf)
         self.model = timm.create_model(model_name=self.hparams.model_name, num_classes=1, pretrained=True, in_chans=1,
                                        drop_rate=self.hparams.drop_rate, drop_path_rate=self.hparams.drop_path_rate)
-        
-        if self.hparams.restart:
+        if self.hparams.model_path is not None:
             print(f'load model path: {self.hparams.model_path}')
             self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
-        else:
-            if self.hparams.model_path is not None:
-                print(f'load model path: {self.hparams.model_path}')
-                self.model.load_state_dict(torch.load(self.hparams.model_path, map_location='cpu'))
         self.criteria = torch.nn.BCEWithLogitsLoss()
 
     def forward(self, x):
@@ -209,17 +211,12 @@ class LitSystem(pl.LightningModule):
         return self.model(x)
 
     def configure_optimizers(self):
-        if self.hparams.finetune:
-            if 'nfnet' in self.hparams.model_name:
-                optimizer = RAdam(self.model.head.parameters(), lr=self.hparams.lr)
-            else:
-                optimizer = RAdam(self.model.classifier.parameters(), lr=self.hparams.lr)
-            return [optimizer]
-        else:
-            optimizer = RAdam(self.model.parameters(), lr=self.hparams.lr)
-            scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.hparams.epoch)
-            return [optimizer], [scheduler]
+
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.hparams.lr)
+
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.hparams.epoch)
         
+        return [optimizer], [scheduler]
 
     def training_step(self, batch, batch_idx):
         x, y = batch
@@ -282,36 +279,8 @@ def main():
 
     data_module = SETIDataModule(conf)
 
-    if conf.model_path is None:
-        conf.restart = False
-        conf.finetune = True
-        lit_model = LitSystem(conf)
-        # fine tune
-        trainer = Trainer(
-            #logger=[tb_logger, csv_logger],
-            #callbacks=[lr_monitor, checkpoint_callback],
-            max_epochs=1,
-            gpus=-1,
-            amp_backend='native',
-            amp_level='O2',
-            precision=16,
-            num_sanity_val_steps=10,
-            val_check_interval=1.0,
-            **conf.trainer
-                )
-    
-        trainer.fit(lit_model, data_module)
-    
-        torch.save(lit_model.model.state_dict(), os.path.join('/kqi/output', 'tmp.ckpt'))
-    
-        conf.model_path = os.path.join('/kqi/output', 'tmp.ckpt')
-        conf.finetune = False
-    else:
-        conf.restart = True
-        conf.finetune = False
-
     lit_model = LitSystem(conf)
-    # training
+
     trainer = Trainer(
         logger=[tb_logger, csv_logger],
         callbacks=[lr_monitor, checkpoint_callback],

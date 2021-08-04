@@ -9,10 +9,10 @@
 * ☆異常検知でtrainにないパターンを弾く
 
 * *-1したreverse sample(exp021.sh)
-* 疑似ラベルつかってfinetune
-* noisy student
+* 疑似ラベルつかってfinetune(exp022.sh)
+* noisy student(exp023.sh)
 * 半教師あり(?)
-* nfnet
+* nfnet(exp024.sh)
 
 * unseenについての対策、可視化、GradCAM
 
