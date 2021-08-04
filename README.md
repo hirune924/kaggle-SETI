@@ -13,7 +13,7 @@
 * noisy student(exp023.sh)
 * 半教師あり(fixmatch?)(exp025.sh)
 * nfnet(exp024.sh)
-
+* 丁寧なアンサンブル
 * aaa, bcdの差をスコアにする
 * testにだけ縦スジ？
 * trainデータにnoisyなシグナルがある？実は信号あるのに0になってるみたいな
