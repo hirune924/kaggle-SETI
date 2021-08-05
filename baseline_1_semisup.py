@@ -287,7 +287,7 @@ class LitSystem(pl.LightningModule):
         cons_loss = F.binary_cross_entropy_with_logits(logits_u_s, pseudo_target, reduction='none')
         cons_loss = (cons_loss * mask).mean()
         
-        return loss#+cons_loss
+        return loss+cons_loss
 
     def validation_step(self, batch, batch_idx):
         x, y = batch
