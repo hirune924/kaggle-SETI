@@ -4,6 +4,7 @@
 * Unsupervised Domain Adaptationもスコアは微落ちするだけだった、一般画像とは違う(inference_1_uda.py)
 * oldデータ使うのはcv的には良さそう
 * 疑似ラベル使うのもcv的には良さそう
+* gaussian noise加えるのはちょい落ちる。まぁnoiseの加え方が雑過ぎたのかもしれんが
 
 # 次の実験計画
 * Unsupervised Domain Adaptation(inference_1_uda.py)
