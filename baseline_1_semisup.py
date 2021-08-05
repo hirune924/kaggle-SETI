@@ -121,7 +121,8 @@ class SETIDataset_unlbl(Dataset):
         img_pl = Image.fromarray(image).resize((self.conf.height, self.conf.width), resample=Image.BICUBIC)
         image = np.array(img_pl)
 
-        image_aug = image + torch.normal(0,torch.rand(1)[0]+0.0001,size=image.shape).numpy()
+        #image_aug = image + torch.normal(0,torch.rand(1)[0]+0.0001,size=image.shape).numpy()
+        image_aug = image
 
         if self.transform is not None:
             image_aug = self.transform(image=image_aug)['image']
@@ -281,7 +282,7 @@ class LitSystem(pl.LightningModule):
 
         pseudo_target = torch.sigmoid(logits_u_w).detach()
 
-        mask = ((pseudo_target>0.9) | (pseudo_target<0.1))
+        mask = ((pseudo_target>0.9) | (pseudo_target<0.05))
         cons_loss = F.binary_cross_entropy_with_logits(logits_u_s, pseudo_target, reduction='none')
         cons_loss = (cons_loss * mask).mean()
         
