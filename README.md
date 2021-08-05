@@ -21,6 +21,7 @@
 * 半教師あり(fixmatch?)(exp025.sh)
 
 # ネタ帳
+* ノイズと明るいピクセルは信号？(https://www.kaggle.com/tentotheminus9/seti-data)
 * ノイズ除去と擬似ラベルの組み合わせ
 * aaa, bcdの差をスコアにする
 * testにだけ縦スジ？
