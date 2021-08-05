@@ -1,18 +1,23 @@
 # kaggle-SETI
+# 実験結果
+* aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせるのは微妙やった、aaaだけだと辛くない？(exp020.sh)
+* Unsupervised Domain Adaptationもスコアは微落ちするだけだった、一般画像とは違う(inference_1_uda.py)
+* oldデータ使うのはcv的には良さそう
+* 疑似ラベル使うのもcv的には良さそう
 
 # 次の実験計画
-* ☆☆Unsupervised Domain Adaptation(inference_1_uda.py)
-* ☆☆gauss noise再び(exp018.sh)
-* ☆oldデータ使う？？(exp019.sh)
-* ☆aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
-* ☆擬似ラベル
-* ☆異常検知でtrainにないパターンを弾く
+* Unsupervised Domain Adaptation(inference_1_uda.py)
+* gauss noise再び(exp018.sh)
+* oldデータ使う？？(exp019.sh)
+* aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
 
 * *-1したreverse sample(exp021.sh)
 * 疑似ラベルつかってfinetune(exp022.sh)
 * noisy student(exp023.sh)
 * 半教師あり(fixmatch?)(exp025.sh)
 * nfnet(exp024.sh)
+
+
 * 丁寧なアンサンブル
 * ノイズ除去と擬似ラベルの組み合わせ
 * aaa, bcdの差をスコアにする
@@ -20,6 +25,7 @@
 * trainデータにnoisyなシグナルがある？実は信号あるのに0になってるみたいな
 * 信号ありとなしの差を予測する？
 * unseenについての対策、可視化、GradCAM
+* 異常検知でtrainにないパターンを弾く
 
 * CAN4UDA( https://www.aminer.cn/pub/5c5ce50d17c44a400fc38bf2/contrastive-adaptation-network-for-unsupervised-domain-adaptation )
 * ADDA( https://www.slideshare.net/YuusukeIwasawa/dl-asymmetric-tritraining-for-unsupervised-domain-adaptation-icml2017-and-neural-domain-adaptation )( https://github.com/jvanvugt/pytorch-domain-adaptation/blob/master/adda.py )
