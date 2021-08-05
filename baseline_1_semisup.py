@@ -261,6 +261,11 @@ class LitSystem(pl.LightningModule):
         x, y = batch[0]
         x_w, x_s, y = batch[1]
         
+        with torch.no_grad():
+            self.model.eval()
+            logits_u_w = self.model(x_w)
+        self.model.train()
+        
         if self.current_epoch < self.hparams.epoch*0.8:
             # mixup
             alpha = 1.0
@@ -274,10 +279,6 @@ class LitSystem(pl.LightningModule):
         y_hat = self.model(x)
         loss = self.criteria(y_hat, y)
 
-        with torch.no_grad():
-            self.model.eval()
-            logits_u_w = self.model(x_w)
-        self.model.train()
         logits_u_s = self.model(x_s)
 
         pseudo_target = torch.sigmoid(logits_u_w).detach()
