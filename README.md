@@ -1,4 +1,12 @@
 # kaggle-SETI
+
+# 次の実験計画
+* 新しい疑似ラベルを使ったfinetune
+* 新しい疑似ラベルを使ったnoisy student
+* 疑似ラベルのtarget1側の閾値をグッと下げてみる？
+* 疑似ラベルとoldデータを両方使う
+* setigen使う
+
 # 実験結果
 * aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせるのは微妙やった、aaaだけだと辛くない？(exp020.sh)
 * Unsupervised Domain Adaptationもスコアは微落ちするだけだった、一般画像とは違う(inference_1_uda.py)
