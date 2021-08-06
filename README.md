@@ -12,10 +12,10 @@
 * Unsupervised Domain Adaptation(inference_1_uda.py)
 * gauss noise再び(exp018.sh)
 * aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
-
-* oldデータ使う？？(exp019.sh) 
 * *-1したreverse sample(exp021.sh)
 * 疑似ラベルつかってfinetune(exp022.sh)
+
+* oldデータ使う？？(exp019.sh) 
 * noisy student(exp023.sh)
 * nfnet(exp024.sh)
 * 半教師あり(fixmatch?)(exp025.sh)
