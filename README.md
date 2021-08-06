@@ -9,6 +9,7 @@
 * 丁寧なアンサンブルもちょい微妙...
 * *-1したreverse sampleはやっぱアカンかった...(exp021.sh)
 * 疑似ラベルつかってfinetuneするのは抜群に効いた(exp022.sh)
+* consistency lossは学習超むずい...なんでや...
 
 # 次の実験計画
 * Unsupervised Domain Adaptation(inference_1_uda.py)
@@ -16,11 +17,12 @@
 * aaa, bcdを別々に扱うモデルを作ってinference時に2回別々に推論して組み合わせる(exp020.sh)
 * *-1したreverse sample(exp021.sh)
 * 疑似ラベルつかってfinetune(exp022.sh)
+* 半教師あり(fixmatch?)(exp025.sh)
 
 * oldデータ使う？？(exp019.sh) 
 * noisy student(exp023.sh)
 * nfnet(exp024.sh)
-* 半教師あり(fixmatch?)(exp025.sh)
+
 
 # ネタ帳
 * ノイズと明るいピクセルは信号？(https://www.kaggle.com/tentotheminus9/seti-data)
