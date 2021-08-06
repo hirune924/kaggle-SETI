@@ -61,6 +61,9 @@ conf_dict = {'batch_size': 8,#32,
              'data_dir': '../input/seti-breakthrough-listen',
              'model_path': None,
              'output_dir': './',
+             'pseudo': 'pseudo802.csv',
+             'low_th': 0.05,
+             'high_th': 0.95,
              'trainer': {}}
 conf_base = OmegaConf.create(conf_dict)
 
@@ -126,8 +129,8 @@ class SETIDataModule(pl.LightningDataModule):
             train_df = df[df['fold'] != self.conf.fold]
             valid_df = df[df['fold'] == self.conf.fold]
 
-            pseudo_df = pd.read_csv("pseudo802.csv")
-            pseudo_df = pseudo_df[(pseudo_df['target']<0.05)|(pseudo_df['target']>0.95)]
+            pseudo_df = pd.read_csv(self.conf.pseudo)
+            pseudo_df = pseudo_df[(pseudo_df['target']<self.conf.low_th)|(pseudo_df['target']>self.conf.high_th)]
 
             pseudo_df['dir'] = os.path.join(self.conf.data_dir, "test")
 
