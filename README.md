@@ -7,6 +7,8 @@
 * →じゃ両方使うか?
 * gaussian noise加えるのはちょい落ちる。まぁnoiseの加え方が雑過ぎたのかもしれんが
 * 丁寧なアンサンブルもちょい微妙...
+* *-1したreverse sampleはやっぱアカンかった...(exp021.sh)
+* 疑似ラベルつかってfinetuneするのは抜群に効いた(exp022.sh)
 
 # 次の実験計画
 * Unsupervised Domain Adaptation(inference_1_uda.py)
