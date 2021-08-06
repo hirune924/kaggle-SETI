@@ -88,6 +88,11 @@ class SETIDataset(Dataset):
         
         image = np.load(file_path)
         image = image.astype(np.float32)
+        
+        for i in range(image.shape[0]):
+            image[i] -= image[i].mean()
+            image[i] /= image[i].std()
+            
         image = np.vstack(image).transpose((1, 0))
         
         img_pl = Image.fromarray(image).resize((self.conf.height, self.conf.width), resample=Image.BICUBIC)
