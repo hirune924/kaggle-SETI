@@ -1,10 +1,10 @@
 # kaggle-SETI
 
 # 次の実験計画
-* 新しい疑似ラベルを使ったfinetune
-* 新しい疑似ラベルを使ったnoisy student
-* 疑似ラベルのtarget1側の閾値をグッと下げてみる？
-* 疑似ラベルとoldデータを両方使う
+* 新しい疑似ラベルを使ったfinetune(exp026.sh)
+* 新しい疑似ラベルを使ったnoisy student(exp027.sh)
+* 疑似ラベルのtarget1側の閾値をグッと下げてみる？(exp028.sh)
+* 疑似ラベルとoldデータを両方使う(exp029.sh)
 * setigen使う
 
 # 実験結果
