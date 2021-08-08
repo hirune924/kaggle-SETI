@@ -3,6 +3,7 @@
 * bright pixcel対策したい
 * シンプルにadd signal
 * max pool resize
+* 1x6にGAPするcustom head系
 * add signalしてリサイズなし
 * add signalして周波数方向に結合
 
