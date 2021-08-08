@@ -1,4 +1,12 @@
 # kaggle-SETI
+# 実験計画
+* bright pixcel対策したい
+* シンプルにadd signal
+* add signalしてリサイズなし
+* add signalして周波数方向に結合
+
+# 実験結果
+* 結果が出次第書く
 
 # 次の実験計画
 * 新しい疑似ラベルを使ったfinetune(exp026.sh)
@@ -18,6 +26,7 @@
 * *-1したreverse sampleはやっぱアカンかった...(exp021.sh)
 * 疑似ラベルつかってfinetuneするのは抜群に効いた(exp022.sh)
 * consistency lossは学習超むずい...なんでや...
+* old dataは微妙に効くが学習時間が長い...
 
 # 次の実験計画
 * Unsupervised Domain Adaptation(inference_1_uda.py)
