@@ -2,6 +2,7 @@
 # 実験計画
 * bright pixcel対策したい
 * シンプルにadd signal
+* max pool resize
 * add signalしてリサイズなし
 * add signalして周波数方向に結合
 
