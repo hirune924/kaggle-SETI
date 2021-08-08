@@ -91,12 +91,13 @@ conf_base = OmegaConf.create(conf_dict)
 ####################
 
 class SETIDataset(Dataset):
-    def __init__(self, df, transform=None, conf=None):
+    def __init__(self, df, transform=None, conf=None, train=False):
         self.df = df.reset_index(drop=True)
         self.labels = df['target'].values
         self.dir_names = df['dir'].values
         self.transform = transform
         self.conf = conf
+        self.train = train
         
     def __len__(self):
         return len(self.df)
@@ -109,9 +110,10 @@ class SETIDataset(Dataset):
         image = image.astype(np.float32)
 
         label = self.labels[idx]
-        if label == 0:
-            if torch.rand(1) < 0.20:
-                image, label = add_signal(image)
+        if self.train:
+            if label == 0:
+                if torch.rand(1) < 0.20:
+                    image, label = add_signal(image)
         label = torch.tensor([label]).float()
         
         for i in range(image.shape[0]):
@@ -210,8 +212,8 @@ class SETIDataModule(pl.LightningDataModule):
             #            #A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
             #            ])
 
-            self.train_dataset = SETIDataset(train_df, transform=train_transform,conf=self.conf)
-            self.valid_dataset = SETIDataset(valid_df, transform=None, conf=self.conf)
+            self.train_dataset = SETIDataset(train_df, transform=train_transform,conf=self.conf, train=True)
+            self.valid_dataset = SETIDataset(valid_df, transform=None, conf=self.conf, train=False)
             
         elif stage == 'test':
             test_df = pd.read_csv(os.path.join(self.conf.data_dir, "sample_submission.csv"))
