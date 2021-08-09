@@ -250,13 +250,13 @@ class LitSystem(pl.LightningModule):
         if self.hparams.model_path is not None:
             print(f'load model path: {self.hparams.model_path}')
             self.model = load_pytorch_model(self.hparams.model_path, self.model, ignore_suffix='model')
-        self.model.global_pool = nn.Sequential(nn.AdaptiveAvgPool2d(output_size),nn.Flatten())
+        self.model.global_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1,6)),nn.Flatten())
         in_features = self.model.num_features
         num_classes = self.model.num_classes
         drop_rate = self.model.drop_rate
         self.model.classifier = nn.Sequential(nn.Linear(in_features*6,512),nn.Mish(),
                                                    nn.BatchNorm1d(512), nn.Dropout(drop_rate),
-                                                   nn.Linear(512,num_classes))
+                                                   nn.Linear(512,1))
         
         
         self.criteria = torch.nn.BCEWithLogitsLoss()
