@@ -1,7 +1,8 @@
 # kaggle-SETI
 # 実験計画
 * bright pixcel対策したい
-* シンプルにadd signal
+* シンプルにadd signal(exp030.sh)
+* 新しい疑似ラベルを使ったnoisy student(exp031.sh)
 * max pool resize
 * 1x6にGAPするcustom head系
 * add signalしてリサイズなし
