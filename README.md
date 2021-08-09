@@ -4,7 +4,7 @@
 * シンプルにadd signal(exp030.sh)
 * 新しい疑似ラベルを使ったnoisy student(exp031.sh)
 * max pool resize
-* 1x6にGAPするcustom head系
+* 1x6にGAPするcustom head系(exp032.sh)
 * add signalしてリサイズなし
 * add signalして周波数方向に結合
 
