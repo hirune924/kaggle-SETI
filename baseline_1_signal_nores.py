@@ -254,7 +254,7 @@ class LitSystem(pl.LightningModule):
         in_features = self.model.num_features
         num_classes = self.model.num_classes
         drop_rate = self.model.drop_rate
-        self.model.classifier = nn.Sequential(nn.Linear(in_features*6,512),nn.Mish(),
+        self.model.classifier = nn.Sequential(nn.Linear(in_features*6,512),nn.ReLU(),
                                                    nn.BatchNorm1d(512), nn.Dropout(drop_rate),
                                                    nn.Linear(512,1))
         
