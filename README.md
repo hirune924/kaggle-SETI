@@ -3,7 +3,7 @@
 * bright pixcel対策したい
 * シンプルにadd signal(exp030.sh)
 * 新しい疑似ラベルを使ったnoisy student(exp031.sh)
-* max pool resize
+* max pool resize(exp034.sh)
 * 1x6にGAPするcustom head系(exp032.sh)
 * add signalしてリサイズなし, iafossスタイル(exp033.sh)
 * add signalして周波数方向に結合
