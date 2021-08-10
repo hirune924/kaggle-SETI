@@ -50,7 +50,7 @@ class CustomNet(nn.Module):
         x = self.base_model.global_pool(x) # Bx6, N
         #print(x.shape)
         
-        x = x.view(shape[0],-1)
+        x = x.view(-1,6*self.base_model.num_features)
         #print(x.shape)
         
         if self.base_model.drop_rate > 0.:
