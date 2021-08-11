@@ -7,7 +7,7 @@
 * 1x6にGAPするcustom head系(exp032.sh)
 * add signalしてリサイズなし, iafossスタイル(exp033.sh)
 * add signalして周波数方向に結合
-* 疑似ラベルのtarget1の閾値をグッと上げてみる
+* 疑似ラベルのtarget1の閾値をグッと上げてみる(exp035.sh)
 * 引っ掛けに引っかからないように対策する
 
 # 実験結果
