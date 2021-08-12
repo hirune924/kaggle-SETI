@@ -7,7 +7,7 @@
 * 512x768にしてみる？short(exp042.sh)
 * mixupでfinetune(exp040.sh)
 * seedを変更してnoisy student(exp041.sh)
-* chi2noise
+* 強いchi2noise, 別のクラス
 
 # 実験結果
 * 結果が出次第書く
