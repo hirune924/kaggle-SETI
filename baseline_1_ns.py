@@ -269,7 +269,7 @@ def main():
     conf_cli = OmegaConf.from_cli()
     conf = OmegaConf.merge(conf_base, conf_cli)
     print(OmegaConf.to_yaml(conf))
-    seed_everything(self.conf.seed)
+    seed_everything(conf.seed)
 
     tb_logger = loggers.TensorBoardLogger(save_dir=os.path.join(conf.output_dir, 'tb_log/'))
     csv_logger = loggers.CSVLogger(save_dir=os.path.join(conf.output_dir, 'csv_log/'))
