@@ -1,4 +1,13 @@
 # kaggle-SETI
+
+# 実験計画
+* b6を使ったnoisy student
+* b6を使った疑似ラベル
+* 512x768にしてみる？
+
+# 実験結果
+* 結果が出次第書く
+
 # 実験計画
 * bright pixcel対策したい
 * シンプルにadd signal(exp030.sh)
