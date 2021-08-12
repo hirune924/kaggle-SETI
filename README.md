@@ -5,6 +5,7 @@
 * b6を使った疑似ラベル(exp037_a.sh)
 * 512x768にしてみる？(exp039.sh)
 * mixupでfinetune(exp040.sh)
+* seedを変更してnoisy student(exp041.sh)
 
 # 実験結果
 * 結果が出次第書く
