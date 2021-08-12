@@ -1,9 +1,9 @@
 # kaggle-SETI
 
 # 実験計画
-* b6を使ったnoisy student
-* b6を使った疑似ラベル
-* 512x768にしてみる？
+* b6を使ったnoisy student(exp037.sh)
+* b6を使った疑似ラベル(exp038.sh)
+* 512x768にしてみる？(exp039.sh)
 
 # 実験結果
 * 結果が出次第書く
