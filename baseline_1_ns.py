@@ -62,6 +62,7 @@ conf_dict = {'batch_size': 8,#32,
              'model_path': None,
              'output_dir': './',
              'pseudo': 'pseudo802.csv',
+             'seed': 2021,
              'trainer': {}}
 conf_base = OmegaConf.create(conf_dict)
 
@@ -119,7 +120,7 @@ class SETIDataModule(pl.LightningDataModule):
             df['dir'] = os.path.join(self.conf.data_dir, "train")
             
             # cv split
-            skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=2021)
+            skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.conf.seed)
             for n, (train_index, val_index) in enumerate(skf.split(df, df['target'])):
                 df.loc[val_index, 'fold'] = int(n)
             df['fold'] = df['fold'].astype(int)
@@ -268,7 +269,7 @@ def main():
     conf_cli = OmegaConf.from_cli()
     conf = OmegaConf.merge(conf_base, conf_cli)
     print(OmegaConf.to_yaml(conf))
-    seed_everything(2021)
+    seed_everything(self.conf.seed)
 
     tb_logger = loggers.TensorBoardLogger(save_dir=os.path.join(conf.output_dir, 'tb_log/'))
     csv_logger = loggers.CSVLogger(save_dir=os.path.join(conf.output_dir, 'csv_log/'))
