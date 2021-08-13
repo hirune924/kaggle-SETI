@@ -93,8 +93,9 @@ class SETIDataset(Dataset):
         if self.train:
             #image += torch.normal(0,torch.rand(1)[0]+0.0001,size=image.shape).numpy()
             if torch.rand(1) < 0.75:
-                chi2_df = 1 + np.random.rand()
-                image += np.random.chisquare(df=chi2_df, size=image.shape) / chi2_df # * x_mean / chi2_df
+                #chi2_df = 1 + np.random.rand()
+                chi2_df = 0.1 + np.random.rand()*3
+                image += np.random.chisquare(df=chi2_df, size=image.shape)# / chi2_df # * x_mean / chi2_df
 
         for i in range(image.shape[0]):
             image[i] -= image[i].mean()
