@@ -1,5 +1,5 @@
 # kaggle-SETI
-# Test
+
 # 実験計画
 * b6を使ったnoisy student(exp038_a.sh)
 * b6を使った疑似ラベル(exp037_a.sh)
