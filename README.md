@@ -5,10 +5,12 @@
 - b5
 - b6
 - b7
-- tf_efficientnetv2_m_in21ft1k
+- tf_efficientnetv2_m_in21ft1k (exp045.sh)
 - pseudoの影響は弱めにする？(mixupあるしむりぽ)
 
 * 色々なseed
+- exp041
+
 * 色々なinput,学習方法
 
 
