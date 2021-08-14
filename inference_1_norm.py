@@ -226,6 +226,8 @@ def main():
     # get model path
     model_path = []
     for i in range(5):
+        if i == 3:
+            continue
         for j in range(conf.snap):
             target_model = glob.glob(os.path.join(conf.model_dir, f'fold{i}_{j}/ckpt/*epoch*.ckpt'))
             scores = [float(os.path.splitext(os.path.basename(i))[0].split('=')[-1]) for i in target_model]
