@@ -1,14 +1,28 @@
 # kaggle-SETI
 
+# 最終戦略(多様性を出したい)
+* 色々なモデル
+- b5
+- b6
+- b7
+- tf_efficientnetv2_m_in21ft1k
+- pseudoの影響は弱めにする？(mixupあるしむりぽ)
+
+* 色々なseed
+* 色々なinput,学習方法
+
+
 # 実験計画
 * b6を使ったnoisy student(exp038_a.sh)
 * b6を使った疑似ラベル(exp037_a.sh)
-* 512x768にしてみる？(exp039.sh)
-* 512x768にしてみる？short(exp042.sh)
 * mixupでfinetune(exp040.sh)
 * seedを変更してnoisy student(exp041.sh)
-* mixup切って強いchi2noise, 別のクラス(exp043.sh)
+
 * mixupつけてchi2noise, pseudoは抜き(exp044.sh)
+* 512x768にしてみる？(exp039.sh)
+* 512x768にしてみる？short(exp042.sh)
+* mixup切って強いchi2noise, 別のクラス(exp043.sh)
+
 
 
 # 実験結果
