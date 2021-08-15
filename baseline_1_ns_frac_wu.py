@@ -25,7 +25,7 @@ import timm
 from omegaconf import OmegaConf
 
 from sklearn.metrics import roc_auc_score
-from utils.radam import RAdam
+#from utils.radam import RAdam
 ####################
 # Utils
 ####################
@@ -221,12 +221,12 @@ class LitSystem(pl.LightningModule):
     def configure_optimizers(self):
         if self.hparams.finetune:
             if 'nfnet' in self.hparams.model_name:
-                optimizer = RAdam(self.model.head.parameters(), lr=self.hparams.lr)
+                optimizer = Adam(self.model.head.parameters(), lr=self.hparams.lr)
             else:
-                optimizer = RAdam(self.model.classifier.parameters(), lr=self.hparams.lr)
+                optimizer = Adam(self.model.classifier.parameters(), lr=self.hparams.lr)
             return [optimizer]
         else:
-            optimizer = RAdam(self.model.parameters(), lr=self.hparams.lr)
+            optimizer = Adam(self.model.parameters(), lr=self.hparams.lr)
             scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.hparams.epoch)
             return [optimizer], [scheduler]
         
