@@ -221,12 +221,12 @@ class LitSystem(pl.LightningModule):
     def configure_optimizers(self):
         if self.hparams.finetune:
             if 'nfnet' in self.hparams.model_name:
-                optimizer = torch.nn.Adam(self.model.head.parameters(), lr=self.hparams.lr)
+                optimizer = torch.optim.Adam(self.model.head.parameters(), lr=self.hparams.lr)
             else:
-                optimizer = torch.nn.Adam(self.model.classifier.parameters(), lr=self.hparams.lr)
+                optimizer = torch.optim.Adam(self.model.classifier.parameters(), lr=self.hparams.lr)
             return [optimizer]
         else:
-            optimizer = torch.nn.Adam(self.model.parameters(), lr=self.hparams.lr)
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=self.hparams.lr)
             scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.hparams.epoch)
             return [optimizer], [scheduler]
         
