@@ -14,7 +14,7 @@ model_path=/kqi/parent/22021886/fold2_0/ckpt/fold2-epoch=19-val_score=0.90302.ck
 pseudo=pseudo811.csv seed=${1}
 
 python baseline_1_ns_frac.py fold=3 batch_size=36 epoch=20 height=512 width=512 model_name=tf_efficientnet_b5_ns drop_rate=0.5 drop_path_rate=0.3 \
-model_path=/kqi/parent/22021886/fold3_0/ckpt/fold3-epoch=18-val_score=0.91562.ckpt data_dir=/kqi/parent/22021621 output_dir=/kqi/output/fold3_0 \
+model_path=/kqi/parent/22021886/fold3_0/ckpt/fold3-epoch=12-val_score=0.91197.ckpt data_dir=/kqi/parent/22021621 output_dir=/kqi/output/fold3_0 \
 pseudo=pseudo811.csv seed=${1}
 
 python baseline_1_ns_frac.py fold=4 batch_size=36 epoch=20 height=512 width=512 model_name=tf_efficientnet_b5_ns drop_rate=0.5 drop_path_rate=0.3 \
