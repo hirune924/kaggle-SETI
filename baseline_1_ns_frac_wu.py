@@ -303,6 +303,7 @@ def main():
         trainer = Trainer(
             #logger=[tb_logger, csv_logger],
             #callbacks=[lr_monitor, checkpoint_callback],
+            sync_batchnorm=True,
             max_epochs=1,
             gpus=-1,
             amp_backend='native',
