@@ -221,9 +221,9 @@ def main():
     # get model path
     model_path = []
     for i in range(5):
-        if i == 4:
+        #if i == 4:
             #model_path.append('/kqi/parent/22021886/fold3_0/ckpt/fold3-epoch=18-val_score=0.91562.ckpt')
-            continue
+        #    continue
         #if i == 3:
         #    continue
         for j in range(conf.snap):
