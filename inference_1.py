@@ -221,8 +221,10 @@ def main():
     # get model path
     model_path = []
     for i in range(5):
-        if i == 0:
+        if i == 2:
             #model_path.append('/kqi/parent/22021886/fold3_0/ckpt/fold3-epoch=18-val_score=0.91562.ckpt')
+            continue
+        if i == 3:
             continue
         for j in range(conf.snap):
             target_model = glob.glob(os.path.join(conf.model_dir, f'fold{i}_{j}/ckpt/*epoch*.ckpt'))
